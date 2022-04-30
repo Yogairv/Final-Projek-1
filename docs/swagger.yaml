@@ -1,0 +1,132 @@
+definitions:
+  models.Todo:
+    properties:
+      completed:
+        type: boolean
+      id:
+        type: integer
+      task:
+        type: string
+    required:
+    - completed
+    - task
+    type: object
+  models.TodoAdd:
+    properties:
+      completed:
+        type: boolean
+      task:
+        type: string
+    required:
+    - completed
+    - task
+    type: object
+info:
+  contact: {}
+paths:
+  /todos:
+    get:
+      description: get All Todo List
+      operationId: get-Todo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: Get Todo
+    post:
+      consumes:
+      - application/json
+      description: create new Todo
+      operationId: create-Todo
+      parameters:
+      - description: request body json
+        in: body
+        name: requestbody
+        required: true
+        schema:
+          $ref: '#/definitions/models.TodoAdd'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+      summary: Get Todo
+  /todos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete todo by id
+      operationId: delete-Todo-Id
+      parameters:
+      - description: Todos Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Todo'
+        "400":
+          description: Todo not found
+          schema:
+            type: string
+      summary: Delete Todo by Id
+    get:
+      consumes:
+      - application/json
+      description: find todo by id
+      operationId: get-Todo-Id
+      parameters:
+      - description: Todos Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Todo'
+        "400":
+          description: Todo not found
+          schema:
+            type: string
+      summary: Get Todo by Id
+    put:
+      consumes:
+      - application/json
+      description: updating todo by id
+      operationId: update-Todo-Id
+      parameters:
+      - description: Todos Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: request body json
+        in: body
+        name: requestbody
+        required: true
+        schema:
+          $ref: '#/definitions/models.TodoAdd'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Todo'
+        "400":
+          description: Todo not found
+          schema:
+            type: string
+      summary: Update Todo by Id
+swagger: "2.0"
+© 2022 GitHub, Inc.
